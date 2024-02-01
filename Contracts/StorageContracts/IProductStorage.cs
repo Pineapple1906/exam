@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Contracts.StorageContracts
 {
-    internal interface IProductStorage
+    public interface IProductStorage
     {
         List<ProductViewModel> GetFullList();
         List<ProductViewModel> GetFilteredList(ProductSearchModels model);

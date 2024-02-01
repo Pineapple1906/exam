@@ -1,9 +1,11 @@
 ﻿using Contracts.BindingModels;
+using Contracts.ViewModels;
 using DataModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,16 +13,16 @@ namespace ShopListImplement.Models
 {
     internal class Product : IProduct
     {
-        public int Id => throw new NotImplementedException();
-        public string ProductName => throw new NotImplementedException();
+        public int Id { get; private set; }
+        public string ProductName { get; private set; } = string.Empty;
 
-        public double ProductCost => throw new NotImplementedException();
+        public double ProductCost { get; private set; }
 
-        public DateTime ProductDate => throw new NotImplementedException();
+        public DateTime ProductDate { get; private set; }
 
-        public string ProductMaker => throw new NotImplementedException();
+        public string ProductMaker { get; private set; } = string.Empty;
 
-        public int ShopId => throw new NotImplementedException();
+        public int ShopId {get; private set; }
         public static Product? Create(ProductBindingModel? model)
         {
             if (model == null)
@@ -31,7 +33,10 @@ namespace ShopListImplement.Models
             {
                 Id = model.Id,
                 ProductName = model.ProductName,
-                ProductCost = model.ProductCost
+                ProductCost = model.ProductCost,
+                ProductDate = model.ProductDate,
+                ProductMaker = model.ProductMaker,
+                ShopId = model.ShopId
             };
         }
 
@@ -41,9 +46,23 @@ namespace ShopListImplement.Models
             {
                 return;
             }
+            
             ProductName = model.ProductName;
             ProductCost = model.ProductCost;
+            ProductDate = model.ProductDate;
+            ProductMaker = model.ProductMaker;
+            ShopId = model.ShopId;
         }
+
+        public ProductViewModel GetViewModel => new()
+        {
+            Id = Id,
+            ProductName = ProductName,
+            ProductCost = ProductCost,
+            ProductDate = ProductDate,
+            ProductMaker = ProductMaker,
+            ShopId = ShopId,
+        };
 
     }
 }
